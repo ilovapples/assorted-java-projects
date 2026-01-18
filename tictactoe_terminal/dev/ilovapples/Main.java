@@ -1,6 +1,6 @@
 package dev.ilovapples;
 
-import dev.apple.TicTacToeGame;
+import dev.ilovapples.TicTacToeGame;
 import java.util.Scanner;
 
 public final class Main {

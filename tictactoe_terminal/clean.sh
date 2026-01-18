@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-rm -f dev/apple/*.class
+rm -f dev/apple/**/*.class

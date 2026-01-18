@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-$HOME/homebrew/opt/openjdk/bin/java dev.apple.Main
+$HOME/homebrew/opt/openjdk/bin/java dev.ilovapples.Main

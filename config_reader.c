@@ -79,8 +79,9 @@ int32_t main(int32_t argc, char **argv) {
 
       const size_t found_on_line = line_num;
 
+      // search for '=' char
       char *equals_pos = line_buffer + option_name_len;
-      while (isspace(*equals_pos))
+      while (isspace((unsigned char)*equals_pos))
             ++equals_pos;
       if (*equals_pos == '\0') {
             fail_with_error_code(3,
@@ -92,8 +93,9 @@ int32_t main(int32_t argc, char **argv) {
                         *equals_pos, option_name, found_on_line);
       }
 
+      // search for delimiter after '='
       char *start_delimiter_pos = equals_pos + 1;
-      while (isspace(*start_delimiter_pos))
+      while (isspace((unsigned char)*start_delimiter_pos))
             ++start_delimiter_pos;
       if (*start_delimiter_pos == '\0') {
             fail_with_error_code(3,

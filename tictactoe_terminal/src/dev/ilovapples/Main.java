@@ -21,26 +21,25 @@ public final class Main {
                 try {
                     int tmp = Integer.parseInt(line);
                     if (tmp < 1 || tmp > 9) {
+						if (tmp == 0)
+							break game_loop;
                         continue;
                     }
 
                     --tmp;
 
-                    if (game.makeMove(tmp%3, tmp/3)) {
+                    if (game.makeMove(tmp%3, tmp/3))
                         break;
-                    }
                 } catch (Exception e) {
-                    if (line.equalsIgnoreCase("q")) {
+                    if (line.equalsIgnoreCase("q"))
                         break game_loop;
-                    }
                     continue;
                 }
             }
 
             final int winner = game.checkWinner();
-            if (winner == -1) {
+            if (winner == -1)
                 continue;
-            }
             System.out.print("\u001b[2J\u001b[f");
             game.printBoard();
             switch (winner) {

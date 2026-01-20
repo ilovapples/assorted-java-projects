@@ -6,6 +6,23 @@
 #include <stdlib.h>
 #include <string.h>
 
+// config file spec:
+//
+// ```
+// option_name = 'value'
+// ```
+//
+// the delimiter (single quote in this case) is whatever is the first
+// non-whitespace character after the '='.
+//
+// values are read raw from start to end delimiter.
+//
+// whitespace around '=' does not matter.
+//
+// no option other than the one being searched for will be checked.
+//
+// the 'option_name = ' part must be the start of the line it's on.
+
 #define PROGRAM_NAME "config_reader"
 #define LINE_BUFFER_SIZE 8192
 
@@ -51,7 +68,11 @@ int32_t main(int32_t argc, char **argv) {
                   }
             }
 
-            if (strncmp(line_buffer, option_name, option_name_len) == 0) break;
+            if (strncmp(line_buffer, option_name, option_name_len) == 0) {
+                  const char after_option = line_buffer[option_name_len];
+                  if (isspace(after_option) || after_option == '=')
+                        break;
+            }
 
             ++line_num;
       }
@@ -90,9 +111,9 @@ int32_t main(int32_t argc, char **argv) {
                   return 0;
             }
 
-            fputs(start_delimiter_pos, stdout);
+            fputs(start_search_pos, stdout);
 
-            start_delimiter_pos = line_buffer;
+            start_search_pos = line_buffer;
 
             if (fgets(line_buffer, LINE_BUFFER_SIZE, fp) == NULL) {
                   if (ferror(fp)) {
@@ -123,7 +144,7 @@ void fail_with_error_code(int32_t code, const char *fmt, ...)
       va_end(ap);
       fputc('\n', stderr);
 
-      fclose(fp);
+      if (fp) fclose(fp);
       exit(code);
 }
 

@@ -49,7 +49,7 @@ int32_t main(int32_t argc, char **argv) {
 
       fp = fopen(config_file, "rb");
       if (!fp)
-            fail_with_error_code(2, "failed to open file '%s'", config_file);
+            fail_with_error_code(2, "failed to open file '%s' for reading", config_file);
 
       char line_buffer[LINE_BUFFER_SIZE];
 
@@ -106,7 +106,7 @@ int32_t main(int32_t argc, char **argv) {
 
       char *start_search_pos = start_delimiter_pos + 1;
       for (;;) {
-            char *potential_end_pos = strchr(start_search_pos, delimiter);
+            char *const potential_end_pos = strchr(start_search_pos, delimiter);
             if (potential_end_pos != NULL) {
                   *potential_end_pos = '\0';
                   fputs(start_search_pos, stdout);

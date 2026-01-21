@@ -1,0 +1,3 @@
+project_root    = 'dev/ilovapples'
+source_path     = 'src/main/java'
+build_path      = 'build'

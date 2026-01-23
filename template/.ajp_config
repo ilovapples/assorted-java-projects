@@ -1,4 +1,4 @@
 project_root    = 'dev/ilovapples'
-source_path     = 'src/main/java'
+source_path     = '.'
 build_path      = 'build'
 entrypoint      = 'Main'
